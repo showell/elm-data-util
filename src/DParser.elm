@@ -3,6 +3,11 @@ module DParser exposing
     , parse
     )
 
+{--| This module parses JSON-like text into a custom type
+    called D.
+
+--}
+
 import Parser
     exposing
         ( Parser
