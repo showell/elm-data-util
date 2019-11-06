@@ -6,9 +6,9 @@ module DParser exposing
 {-| This module parses JSON-like text into a custom type
 called D.
 
-    @docs D
+@docs D
 
-    @docs parse
+@docs parse
 
 -}
 
