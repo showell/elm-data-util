@@ -3,10 +3,14 @@ module DParser exposing
     , parse
     )
 
-{--| This module parses JSON-like text into a custom type
-    called D.
+{-| This module parses JSON-like text into a custom type
+called D.
 
---}
+    @docs D
+
+    @docs parse
+
+-}
 
 import Parser
     exposing
@@ -23,22 +27,25 @@ import Parser
         )
 
 
+{-|
 
-{--
     D stands for whatever you want:
         * data
         * dynamic
         * don't know
         * development use only
---}
 
-
+-}
 type D
     = DInt Int
     | DFloat Float
     | DList (List D)
 
 
+{-| parse turns a JSON-like string
+into a value of type D (where D is a custom
+type with DInt, DFloat, etc.)
+-}
 parse : String -> Result String D
 parse s =
     case run parseExpr s of
