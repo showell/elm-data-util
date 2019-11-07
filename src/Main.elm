@@ -63,12 +63,19 @@ subscriptions _ =
 view : Model -> Browser.Document Msg
 view model =
     let
-        f1 =
-            Debug.log "factorial" CodeSample.factorial
+        code s =
+            s
+                |> Html.text
+                |> List.singleton
+                |> Html.pre []
 
-        f2 =
-            Debug.log "factorial2" CodeSample.factorial2
+        body =
+            [ Html.h3 [] [ Html.text "Code samples" ]
+            , code CodeSample.factorial
+            , code CodeSample.factorial2
+            , code CodeSample.ranks
+            ]
     in
     { title = model.title
-    , body = [ Html.text "see debugger" ]
+    , body = body
     }

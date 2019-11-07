@@ -1,6 +1,6 @@
 module CodeSample exposing
     ( formatCode
-    , factorial, factorial2
+    , factorial, factorial2, ranks
     )
 
 {-| This module gives example code snippets
@@ -18,7 +18,7 @@ defining little snippets from the bottom up and combining
 them into the final code. You may prefer to inline things a bit
 more.
 
-@docs factorial, factorial2
+@docs factorial, factorial2, ranks
 
 -}
 
@@ -37,7 +37,7 @@ formatCode code =
         |> Pretty.pretty 120
 
 
-binOp op expr1 expr2 =
+binOp expr1 op expr2 =
     -- CG.infixNon may be deprecated eventually
     CG.opApply op CG.infixNon expr1 expr2
 
@@ -57,10 +57,10 @@ factorial =
             CG.int 1
 
         nEqualZero =
-            binOp "==" n zero
+            binOp n "==" zero
 
         nMinusOne =
-            binOp "-" n one
+            binOp n "-" one
                 |> CG.parens
 
         f =
@@ -70,7 +70,7 @@ factorial =
             CG.apply [ f, nMinusOne ]
 
         elseExpr =
-            binOp "*" n facNminusOne
+            binOp n "*" facNminusOne
 
         code =
             CG.ifExpr nEqualZero one elseExpr
@@ -110,5 +110,63 @@ factorial2 =
 
         code =
             CG.pipe range [ foldl ]
+    in
+    formatCode code
+
+
+{-| convert items to simple rankings like [ 4, 1, 2, 3 ] based
+on their order
+-}
+ranks : String
+ranks =
+    let
+        lst =
+            CG.val "lst"
+
+        {--
+            Here, we use CG.fun instead of CG.fqFun, just for
+            convenience.
+        --}
+        map =
+            CG.fun "List.map"
+
+        sortBy =
+            CG.fun "List.sortBy"
+
+        indexedMap =
+            CG.fun "List.indexedMap"
+
+        first =
+            CG.fun "Tuple.first"
+
+        second =
+            CG.fun "Tuple.second"
+
+        pair =
+            CG.fun "Tuple.pair"
+
+        n =
+            CG.val "n"
+
+        one =
+            CG.val "1"
+
+        nPlusOne =
+            binOp n "+" one
+
+        incrLambda =
+            CG.lambda [ CG.varPattern "n" ] nPlusOne
+
+        code =
+            CG.pipe
+                lst
+                [ CG.apply [ indexedMap, pair ]
+                , CG.apply [ sortBy, second ]
+                , CG.apply [ map, first ]
+                , CG.apply [ indexedMap, pair ]
+                , CG.apply [ sortBy, second ]
+                , CG.apply [ map, first ]
+                , CG.apply [ map, incrLambda ]
+                ]
     in
     formatCode code
