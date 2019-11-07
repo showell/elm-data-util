@@ -1,4 +1,7 @@
-module CodeSample exposing (factorial)
+module CodeSample exposing
+    ( formatCode
+    , factorial
+    )
 
 {-| This module gives example code snippets
 using elm-syntax-dsl. It also provides a
