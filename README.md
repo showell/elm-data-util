@@ -1,11 +1,12 @@
-This project helps you parser JSON into a custom type
-with things like DFloat, DInt, and DList.
+simple wrappers for Elm.CodeGen:
+
+This project gives you simple wrappers and
+examples for using Elm.CodeGen
 
 It is very early stages!!!!
 
-The eventual goal is to help you generate Elm code
-from JSON payloads.  It will read the data, infer the
-structure, and generate sample code for things like
-decoders.
+Contributions are welcome.  I am usually on
+Slack (@showell).
 
-It is intended as a DEVELOPMENT TOOL ONLY.
+2019-11-07
+Steve

@@ -1,7 +1,7 @@
 module Main exposing (main)
 
 import Browser
-import DParser
+import CodeSample
 import Html
 
 
@@ -64,7 +64,7 @@ view : Model -> Browser.Document Msg
 view model =
     let
         _ =
-            Debug.log "example" (DParser.parse "10.2")
+            Debug.log "example" CodeSample.factorial
     in
     { title = model.title
     , body = [ Html.text "see debugger" ]
