@@ -63,8 +63,11 @@ subscriptions _ =
 view : Model -> Browser.Document Msg
 view model =
     let
-        _ =
-            Debug.log "example" CodeSample.factorial
+        f1 =
+            Debug.log "factorial" CodeSample.factorial
+
+        f2 =
+            Debug.log "factorial2" CodeSample.factorial2
     in
     { title = model.title
     , body = [ Html.text "see debugger" ]
